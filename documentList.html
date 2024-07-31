@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Communication Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="styles/style.css" rel="stylesheet" />
+   
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="chatList.html">Group Chat</a>
+            <a href="userList.html">Manage Users</a>
+            <a href="documentList.html" class="active">Manage Documents</a>
+            <a onclick="userLogout()" class="userLogout">Logout</a>
+        </nav>
+        <h1 class="text-left">My Uploads</h1>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th width="40%">Label</th>
+                    <th class="text-center">File Name</th>
+                    <th width="20%" class="text-center">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    function myUploads() {
+                        const label = document.getElementById("label").value; 
+                        const filenameInput = document.getElementById("filename");
+                        const filename = filenameInput.value.split('\\').pop(); 
+                        
+                        document.getElementById('labelUploadError').textContent = '';
+                        document.getElementById('filenameUploadError').textContent = '';
+
+                        if (label === '') {
+                            document.getElementById('labelUploadError').textContent = 'Please enter file description';
+                            return false;
+                        }
+
+                        if (filename === '') {
+                            document.getElementById('filenameUploadError').textContent = 'Please add file';
+                            return false;
+                        }
+
+                        const fileInfo = localStorage.getItem("fileInfo") ? JSON.parse(localStorage.getItem("fileInfo")) : [];
+
+                        const file = {
+                            id: Number(new Date()),
+                            label: label,
+                            filename: filename
+                        };
+
+                        fileInfo.push(file);
+                        localStorage.setItem("fileInfo", JSON.stringify(fileInfo));
+                        return true;
+                    }
+
+
+                    let fileInfo = JSON.parse(localStorage.getItem("fileInfo"));
+
+                    let htmlContent = "";
+                    for (let i = 0; i < fileInfo.length; i++) {
+                        htmlContent += `<tr>
+                                    <td>${fileInfo[i].label}</td>
+                                    <td class="text-center">${fileInfo[i].filename}</td>
+                                    <td class="text-center">
+                                        <a class="btn-link" href='#' onclick='editUser(${i})'>Edit</a> | 
+                                        <a class="btn-link" href='#' onclick='deleteUser(${i})'>Delete</a></td>
+                                </tr>`;
+                    }                    
+
+
+                    function deleteUser(index) {
+                        let confirmDelete = window.confirm("Are you sure you want to delete this user?");
+                        if (confirmDelete) {
+                            fileInfo.splice(index, 1);
+                            localStorage.setItem("fileInfo", JSON.stringify(fileInfo));
+                            location.reload();
+                        }
+                    }
+                    $('#editUploadModal').on('show.bs.modal', function(event) {
+                        let button = $(event.relatedTarget)
+                        let recipient = button.data('whatever')
+                        let modal = $(this)
+                        modal.find('.modal-title').text('New message to ' + recipient)
+                        modal.find('.modal-body input').val(recipient)
+                    })
+                    
+                    function editUser(index) {
+                        let modal = $("#editUploadModal");
+                        modal.modal('show');
+                        modal.find(".modal-body #label").val(fileInfo[index].label);
+                        modal.find(".modal-body #filename").val(fileInfo[index].filename);
+                        modal.find(".modal-body #index").val(index);
+                    }
+                    
+                    function myEditUploads() {
+                        let index = $("#editUploadModal .modal-body #index").val();
+                        fileInfo[index].label = $("#editUploadModal .modal-body #label").val();
+                        fileInfo[index].filename = $("#editUploadModal .modal-body #filename").val();          
+                        
+                        localStorage.setItem("fileInfo", JSON.stringify(fileInfo));
+                        location.reload();
+                    }
+
+                    document.write(htmlContent);
+                </script>
+            </tbody>
+        </table>
+        <div>
+            <button class=" btn btn-default" data-bs-toggle="modal" data-bs-target="#addUploadModal">+ Add Upload</button>
+        </div>
+    </div>
+
+    <!-- Add upload modal  -->
+    <div class="modal fade" id="addUploadModal" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="get" onsubmit="return myUploads()">
+                        <div class="mb-3">
+                            <label class="form-label">File Description</label>
+                            <input type="text" name="label" id="label" class="form-control" />
+                            <span id="labelUploadError" class="error"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">File Upload </label>
+                            <input type="file" name="filename" id="filename" class="form-control" />
+                            <span id="filenameUploadError" class="error"></span>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-default">Upload Now</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Edit upload modal  -->
+    <div class="modal fade" id="editUploadModal" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="get" novalidate id="myEditUploads" onsubmit="return myEditUploads()">
+                        <input type="hidden" id="index" name="index" />  
+                        <div class="mb-3">
+                            <label class="form-label">File Description</label>
+                            <input type="text" name="label" id="label" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">File Upload </label>
+                            <input type="text" name="filename" id="filename" class="form-control" />
+                        </div>
+                        <div class="">
+                            <button class="btn btn-default" id="saveChanges();">Save</button>
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  Delete upload modal -->
+    <div class="modal fade" id="deleteUploadModal" data-bs-keyboard="false" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete File</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <strong class="d-block p-3">Are you sure?</strong>
+                    <div class="mt-3">
+                        <button class="btn btn-default" id="confirmDeleteButton">Ok</button>
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>

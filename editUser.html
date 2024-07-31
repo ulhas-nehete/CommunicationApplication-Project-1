@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
+    <script src="./scripts/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="chatList.html">Group Chat</a>
+            <a href="userList.html" class="active">Manage Users</a>
+            <a href="documentList.html">Manage Documents</a>
+            <a onclick="userLogout()" class="userLogout">Logout</a>   
+        </nav>
+        <div class="container-small">
+            <h1 class="text-center mb-4">Edit User Information</h1>
+            <form action="userList.html" method="get" name="editUser" id="editUser" novalidate onsubmit="return editUser()">
+                <input type="hidden" id="userId" name="userId" />   
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="fullname" id="fullname" class="form-control" />
+                    <span id="usernameError" class="error"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" name="email" id="email" class="form-control" />
+                    <span id="emailError" class="error"></span>
+                </div>
+                <div class="mb-3 d-none">
+                    <label class="form-label">Password </label>
+                    <input type="password" name="password" id="password" class="form-control" />
+                </div>
+                <div class="mb-3 d-none">
+                    <label class="form-label">Confirm Password </label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" />
+                </div>
+                <button class="btn btn-default" id="saveChanges">Save</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

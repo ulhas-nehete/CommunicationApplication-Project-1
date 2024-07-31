@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
+    <script src="./scripts/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container-small">
+        <h1 class="text-center">Login</h1>
+        <form action="./loginSuccess.html" method="get" id="loginForm" novalidate onsubmit="return userLogin()">
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" />
+                <span id="emailError" class="error"></span>
+                <span id="validEmailError" class="error"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" />
+                <span id="passwordError" class="error"></span>
+                <span id="emailPasswordError" class="error"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

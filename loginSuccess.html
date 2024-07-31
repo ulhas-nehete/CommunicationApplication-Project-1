@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
+    
+</head>
+<body>
+    <div class="container text-center">
+        <nav class="navbar">
+            <a href="chatList.html">Group Chat</a>
+            <a href="userList.html">Manage Users</a>
+            <a href="documentList.html">Manage Documents</a>
+            <a onclick="userLogout()" class="userLogout">Logout</a> 
+        </nav>
+        <h1> Login Successful</h1>
+        <p><strong>Welcome ! </strong> <span id="email"></span><span id="fullname" class="d-none"></span></p>
+        <script src="./scripts/script.js"></script>
+    </div>
+</body>
+</html>

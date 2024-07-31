@@ -1,0 +1,129 @@
+
+
+.container-small{
+    max-width:400px;
+    margin: 60px auto 30px;
+}
+.form-label{
+    text-align: left;;
+}
+h1{
+    font-size: 1.8rem;
+}
+.btn{
+    border: 1px solid #000;    
+    border-radius: 10px;
+    padding: 8px 40px;
+    text-decoration: none;
+    display: inline-block; 
+}
+.btn-default {
+    background-color: #fff;
+    color: #000;
+}
+.btn:hover {
+    color: #000;
+    background-color: #f5f5f5;
+    border-color: #000;
+}
+.btn-link{
+    color:#000;
+    text-decoration: none;
+}
+.btn-link:hover{
+    text-decoration: underline;
+}
+.navbar{
+    display: flex;    
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ccc;
+    border-radius: 5px;
+    border: 1px solid #000;
+    padding: 0; margin-top:15px;
+    overflow: hidden;
+}
+.navbar > a{
+    flex:1;
+    text-decoration: none;
+    color: #000;
+    padding:8px 10px;
+    text-align: center;
+}
+.navbar > a + a{border-left: 1px solid #000;}
+.navbar > a:hover,
+.navbar > a.active{background-color: #fff;}
+.navbar .userLogout{
+    cursor: pointer;
+}
+.navbar + h1{
+    margin:20px 0;
+}
+.error {
+    color: #dc3545;
+    font-size: 0.875em;
+}
+.error:empty{display: none;}
+.welcome *{margin:25px 0 0;}
+.table-bordered th{
+    background-color: #ccc; font-weight: 500;
+}
+#userList [disabled],
+#userList td:has([disabled]) .divider{
+    display: none;
+}
+.chatBox{
+    border: 1px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.chatMessageBlock{
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;    
+    padding: 15px;    
+} 
+.chatMessageBlock::-webkit-scrollbar {width: 8px;height: 8px; }
+.chatMessageBlock::-webkit-scrollbar-track {background-color: #eaeaea;}
+.chatMessageBlock::-webkit-scrollbar-thumb {background-color: #ccc; }
+.chatMessageBlock::-webkit-scrollbar-thumb:hover {background-color: #aaa; }
+
+.chatMessageBlock > div{
+    display: flex;   
+}
+
+.chatMessageBlock > .message-right{
+    justify-content: flex-end;
+}
+.chatMessageBlock > div > div{
+    min-width: 40%;
+    max-width: 80%;
+    background: #f5f5f5;
+    padding:8px 10px;
+    border-radius: 6px;    
+}
+.chatMessageBlock > .message-right > div{
+    background: #ccc;
+}
+.chatMessageBlock > div + div{
+    margin-top: 15px;
+}
+.chatForm{
+    border-top: 1px solid #000;
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+}
+.chatForm form { display: flex; align-items: flex-start;}
+.chatForm form * + * {margin-left: 10px;}
+.chatForm form #fullname{
+    min-width: 150px;
+    text-align: right;
+    margin-top: 6px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;    
+}
+
+#logoutMessage{
+    display: none; font-weight: 600;
+}
